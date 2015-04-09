@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<div id="articles">
+    <% @articles.each do |article| %>
+	<h2>
+	    <%= link_to article.name, article %>
+	</h2>
+	<div class="content"><%= article.content %></div>
+	    <div class="addition">
+		<span class="author">from <%= h article.author_name %> on <%= article.created_at.strftime('%b %d, %Y') %></span>
+		<span class="comments">(<%= pluralize(article.comments.size, 'comment')%>)</span>
+	    </div>
+	    
+    <% end %>
+</div>
+
+
+<br>
+<% if can? :create, Article %>
+    <%= link_to 'New Article', new_article_path %>
+<% end %>

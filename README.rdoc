@@ -10,3 +10,28 @@
 
 rails _4.2.0_ new authorization -T -d postgresql
 
+rails g scaffold article name:string content:text author_name:string user_id:integer
+rails g scaffold comment article_id:integer author_name:string site_url:string content:text user_id:integer
+
+add two lines in Gemfile
+gem 'cancan'
+gem 'devise'
+
+rails generate devise:install
+
+rails generate devise user
+rails generate model role
+
+rails g migration AddRoleIdToUsers role_id:integer:index
+
+rails g cancan:ability
+
+cacan 1.6.10 has a bug, which raises an error ActiveModel::ForbiddenAttributesError when creating and updating article or comment, you can use cancan's continuation: cancancan 1.10.1 through changing:
+
+gem cancan
+
+into:
+
+gem cancancan
+
+
